@@ -36,7 +36,7 @@
 %nonassoc RBRACE;
 %right ASSIGN;
 %nonassoc RELOP;
-%nonassoc BINOP;
+%left BINOP;
 %nonassoc ID;
 %nonassoc NUM;
 %nonassoc STRING;
