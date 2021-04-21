@@ -8,12 +8,7 @@
 
 %option yylineno
 %option noyywrap
-digit   ([1-9])
-letter  ([a-zA-Z])
 whitespace  ([\r\n\t ])
-hexchar ([0-9a-fA-F])
-escape  (\\n|\\r|\\t|\\0|\\x{hexchar}{2}|\\.)
-%x          STRINGS_TERM
 
 %%
 
@@ -44,13 +39,13 @@ default                                                                         
 (\{)                                                                                                                                                return LBRACE;
 (\})                                                                                                                                                return RBRACE;
 (=)                                                                                                                                                 return ASSIGN;
-( == | != | < | > | <= | >= )                                                                                                                       return RELOP;
-( \+ | \- | \* | \/ )                                                                                                                               return BINOP;
-\/\/[^\r\n]*(\r|\n|\r\n)?                                                                                                                           return COMMENT;
+(==|!=|<|>|<=|>=)                                                                                                                                   return RELOP;
+(\+|\-|\*|\/)                                                                                                                                       return BINOP;
+\/\/[^\r\n]*(\r|\n|\r\n)?                                                                                                                           ;
 [a-zA-Z][a-zA-Z0-9]*                                                                                                                                return ID;
 0|[1-9][0-9]*                                                                                                                                       return NUM;
 {whitespace}                                                                                                                                        ;
-"([^\n\r\"\\]|\\[rnt"\\])+"                                                                                                                         return STRING;
-.                                                                                                                                                   return ERRORCHAR;
+\"([^\n\r\"\\]|\\[rnt"\\])+\"                                                                                                                       return STRING;
+.                                                                                                                                                   {output::errorLex(yylineno); exit(0);};
 
 %%
