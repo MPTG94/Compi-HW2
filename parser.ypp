@@ -1,0 +1,54 @@
+%{
+/* Declarations section */
+    #include <iostream>
+    #include <stdlib.h>
+    using namespace std;
+    extern int yylex();
+    int yyerror(const char * message);
+    #include "output.hpp"
+%}
+
+/* Rules section */
+
+%nonassoc VOID;
+%nonassoc INT;
+%nonassoc BYTE;
+%nonassoc B;
+%nonassoc BOOL;
+%left AND;
+%left OR;
+%right NOT;
+%nonassoc TRUE;
+%nonassoc FALSE;
+%nonassoc RETURN;
+%right IF;
+%right ELSE;
+%nonassoc WHILE;
+%nonassoc BREAK;
+%nonassoc CONTINUE;
+%noassoc SWITCH;
+%noassoc CASE;
+%noassoc DEFAULT;
+%noassoc COLON;
+%nonassoc SC;
+%nonassoc COMMA;
+%left LPAREN;
+%left RPAREN;
+%nonassoc LBRACE;
+%nonassoc RBRACE;
+%right ASSIGN;
+%left RELOPL;
+%nonassoc RELOPN;
+%noassoc BINOP;
+%nonassoc ID;
+%nonassoc NUM;
+%nonassoc STRING;
+
+%%
+
+Program : Funcs{output::printProductionRule(1);};
+Funcs :
+
+%%
+
+/* Code section */
