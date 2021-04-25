@@ -44,9 +44,6 @@
 %left RPAREN;
 %left LPAREN;
 
-
-
-
 %nonassoc SECOND_PRIOR;
 %nonassoc FIRST_PRIOR;
 %%
