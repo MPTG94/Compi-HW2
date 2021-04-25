@@ -16,34 +16,36 @@
 %nonassoc BYTE;
 %nonassoc B;
 %nonassoc BOOL;
-%left AND;
-%left OR;
 %nonassoc TRUE;
 %nonassoc FALSE;
 %nonassoc RETURN;
+%nonassoc IF;
+%nonassoc ELSE;
 %nonassoc WHILE;
 %nonassoc BREAK;
 %nonassoc CONTINUE;
+%nonassoc SC;
+%nonassoc COMMA;
+%nonassoc ID;
+%nonassoc NUM;
+%nonassoc STRING;
+%right ASSIGN;
+%left OR;
+%left AND;
+%nonassoc RELOP;
+%left BINOP;
+%right NOT;
 %nonassoc SWITCH;
 %nonassoc CASE;
 %nonassoc DEFAULT;
 %nonassoc COLON;
-%nonassoc SC;
-%nonassoc COMMA;
-%left LPAREN;
+%left RBRACE;
+%left LBRACE;
 %left RPAREN;
-%nonassoc LBRACE;
-%nonassoc RBRACE;
-%right ASSIGN;
-%nonassoc RELOP;
-%left BINOP;
-%nonassoc ID;
-%nonassoc NUM;
-%nonassoc STRING;
+%left LPAREN;
 
-%right IF;
-%right ELSE;
-%right NOT;
+
+
 
 %nonassoc SECOND_PRIOR;
 %nonassoc FIRST_PRIOR;
@@ -68,7 +70,7 @@ Statement : LBRACE Statements RBRACE{output::printProductionRule(14);} |
             Call SC{output::printProductionRule(18);} |
             RETURN SC{output::printProductionRule(19);} |
             RETURN Exp SC{output::printProductionRule(20);} |
-            IF LPAREN Exp RPAREN Statement{output::printProductionRule(21);} |
+            IF LPAREN Exp RPAREN Statement %prec IF {output::printProductionRule(21);} |
             IF LPAREN Exp RPAREN Statement ELSE Statement{output::printProductionRule(22);} |
             WHILE LPAREN Exp RPAREN Statement{output::printProductionRule(23);} |
             BREAK SC{output::printProductionRule(24);} |
