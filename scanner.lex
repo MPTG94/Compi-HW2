@@ -39,8 +39,10 @@ default                                                                         
 (\{)                                                                                                                                                return LBRACE;
 (\})                                                                                                                                                return RBRACE;
 (=)                                                                                                                                                 return ASSIGN;
-(==|!=|<|>|<=|>=)                                                                                                                                   return RELOP;
-(\+|\-|\*|\/)                                                                                                                                       return BINOP;
+(==|!=)                                                                                                                                             return EQ_NEQ_RELOP;
+(<|>|<=|>=)                                                                                                                                         return REL_RELOP;
+(\+|\-)                                                                                                                                             return ADD_SUB_BINOP;
+(\*|\/)                                                                                                                                             return MUL_DIV_BINOP;
 \/\/[^\r\n]*(\r|\n|\r\n)?                                                                                                                           ;
 [a-zA-Z][a-zA-Z0-9]*                                                                                                                                return ID;
 0|[1-9][0-9]*                                                                                                                                       return NUM;
